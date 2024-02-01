@@ -1,0 +1,23 @@
+﻿::deep igc-tree-item::part(indicator) {
+    /* もともと表示されるインジケーターの色を透明にして、外見上、見えなくしておきます。 */
+    color: transparent;
+    /* その上で、新たなインジケーターを、要素の背景画像として設置します (このサンプルでは SVG 画像を使用しました)。
+       サイズやオフセット位置をうまく調整して、要素の中央に表示されるようにします。
+       (インジケーター要素のサイズは、24px x 24px です) */
+    background-image: url(change_history.svg);
+    background-size: 18px 18px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    /* このサンプルで用意したインジケーター画像は、もともとは頂点が上を向いている三角形のアイコンを流用したので、
+    初期状態で90度回転させておきます。 */
+    transform: rotate(90deg);
+    /*さらにこのサンプルでは、開閉状態の変更に合せて、このインジケーターを90度回転させるので、その間のアニメーションを有効にします。 */
+    transition: transform 0.2s ease-in-out;
+}
+
+/* 展開されているアイテムには aria-expanded=true 属性がつきますので、それをもとに、展開時のインジケーターの外観を定義します。 */
+::deep igc-tree-item[aria-expanded=true]::part(indicator) {
+    /* このサンプルでは、インジケーター画像をさらに 90度回転させる表現としました。
+       もちろん、background-image に別の画像を指定して、開閉状態に合せて異なるインジケーター画像を表示する、といったこともできます。*/
+    transform: rotate(180deg);
+}
